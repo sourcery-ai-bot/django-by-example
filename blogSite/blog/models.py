@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 from django.db.models import (
     BooleanField,
@@ -45,6 +46,7 @@ class Post(Model):
     # Model Managers
     objects = Manager()
     published = PublishedManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-publish',)
@@ -78,3 +80,4 @@ class Comment(Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
