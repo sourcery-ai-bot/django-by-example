@@ -7,6 +7,10 @@ from django.forms import (
     Textarea,
 )
 
+class SearchForm(Form):
+    query = CharField()
+
+
 class EmailPostForm(Form):
     name = CharField(max_length=40)
     email = EmailField()
