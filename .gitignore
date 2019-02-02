@@ -4,3 +4,4 @@ __pycache__
 *.swp
 
 clean-pycache.sh
+keys.sh
