@@ -18,10 +18,18 @@
     {% endblock %}
   </div>
   <div id="sidebar">
-    <h2>My Blog</h2>
+
+    <h2>
+      My Blog 
+      <a href="{% url "blog:post_feed" %}">
+        <i class="fa fa-rss fa-sm"></i>
+      </a>
+    </h2>
     <p>Post Count: {% total_posts %}</p>
+
     <h3>Latest Posts</h3>
     {% show_latest_posts 10 %}
+
     <h3>Most Commented Posts</h3>
     {% get_most_commented_posts 10 as most_commented_posts %}
       <ul>
