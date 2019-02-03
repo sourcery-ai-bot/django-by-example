@@ -15,16 +15,13 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated '
-                                        'successfully')
+                    return HttpResponse('Authenicated Successfully')
                 else:
-                    return HttpResponse('Disabled account')
+                    return HttpResponse('Disabled Account')
             else:
-                return HttpResponse('Invalid login')
+                return HttpResponse('Invalid Login')
     else:
         form = LoginForm()
     return render(request,
                   'account/login.html',
-                  {
-                      'form': form,
-                  })
+                  {'form': form})
