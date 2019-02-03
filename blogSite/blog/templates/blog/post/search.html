@@ -1,8 +1,10 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
+  <a href="{% url "blog:post_list" %}">All Posts</a>
   {% if query %}
     <h1>Posts containing "{{ query }}"</h1>
     <h3>
@@ -14,7 +16,7 @@
       <h4>
         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
       </h4>
-      {{ post.body|truncatewords:5 }}
+      {{ post.body|markdown|truncatewords_html:30 }}
     {% empty %}
       <p>There were no results found for your query</p>
     {% endfor %}
