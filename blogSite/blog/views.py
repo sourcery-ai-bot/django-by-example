@@ -1,4 +1,4 @@
-from .models import Post, Comment
+from .models import Post
 from .forms import (
     EmailPostForm,
     CommentForm,
@@ -8,12 +8,12 @@ from .forms import (
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
-#from django.views.generic import ListView
+# from django.views.generic import ListView
 from django.contrib.postgres.search import (
     SearchVector,
-    SearchQuery,
-    SearchRank,
-    TrigramSimilarity,
+    # SearchQuery,
+    # SearchRank,
+    # TrigramSimilarity,
 )
 from django.core.paginator import (
     Paginator,
@@ -24,7 +24,7 @@ from taggit.models import Tag
 
 
 # Class Based View
-#class PostListView(ListView):
+# class PostListView(ListView):
 #    queryset = Post.published.all()
 #    context_object_name = 'posts'
 #    paginate_by = 4
@@ -123,7 +123,7 @@ def post_search(request):
 #                rank=SearchRank(search_vector, search_query)
 #            ).filter(rank__gte=0.3).order_by('-rank')
 
-#            # TrigramSimilarity 
+#            # TrigramSimilarity
 #            results = Post.objects.annotate(
 #                similarity=TrigramSimilarity('title', query),
 #            ).filter(similarity__gt=0.3).order_by('-similarity')
@@ -151,8 +151,10 @@ def post_share(request, post_id):
             cd = form.cleaned_data
             post_url = request.build_absolute_uri(
                         post.get_absolute_url())
-            subject = f'{cd["name"]} ({cd["email"]}) recommends you read "{post.title}"'
-            message = f'Read "{post.title}" at {post_url}\n\n{cd["name"]}\'s comments {cd["comments"]}'
+            subject = (f'{cd["name"]} ({cd["email"]}) recommends you read '
+                       f'"{post.title}"')
+            message = (f'Read "{post.title}" at {post_url}\n\n{cd["name"]}\'s '
+                       f'comments {cd["comments"]}')
             send_mail(subject, message, 'info@myblog.com', [cd['to']])
             sent = True
     else:
@@ -164,4 +166,3 @@ def post_share(request, post_id):
                       'post': post,
                       'sent': sent,
                   })
-

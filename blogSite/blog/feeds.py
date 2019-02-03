@@ -3,6 +3,7 @@ from .models import Post
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import truncatewords
 
+
 class LatestPostsFeed(Feed):
     title = 'My Blog'
     link = '/blog/'
@@ -16,4 +17,3 @@ class LatestPostsFeed(Feed):
 
     def item_description(self, item):
         return truncatewords(item.body, 30)
-

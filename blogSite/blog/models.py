@@ -16,6 +16,7 @@ from django.db.models import (
     TextField,
 )
 
+
 class PublishedManager(Manager):
     def get_queryset(self):
         return super(PublishedManager, self) \
@@ -80,4 +81,3 @@ class Comment(Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
-
