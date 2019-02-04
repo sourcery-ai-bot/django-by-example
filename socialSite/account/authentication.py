@@ -1,3 +1,4 @@
+from ipdb import set_trace
 from django.contrib.auth.models import User
 
 
@@ -7,11 +8,14 @@ class EmailAuthBackend(object):
     """
     def authenticate(self, request, username=None, password=None):
         try:
+            set_trace()
             user = User.objects.get(email=username)
             if user.check_password(password):
                 return user
             return None
         except User.DoesNotExist:
+            return None
+        except User.MultipleObjectsReturned:
             return None
 
     def get_user(self, user_id):
