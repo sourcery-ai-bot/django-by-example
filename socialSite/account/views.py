@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from actions.utils import create_action
 from common.decorators import ajax_required
 from .forms import (
     LoginForm,
@@ -47,6 +48,7 @@ def register(request):
             # Save the User object
             new_user.save()
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'has created an account')
             return render(
                 request, "account/register_done.html", {"new_user": new_user}
             )
@@ -118,6 +120,7 @@ def user_follow(request):
                 Contact.objects.get_or_create(
                     user_from=request.user, user_to=user
                 )
+                create_action(request.user, 'is following', user)
             else:
                 Contact.objects.filter(
                     user_from=request.user, user_to=user
