@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # my apps
     "account.apps.AccountConfig",
     "images.apps.ImagesConfig",
+    "actions.apps.ActionsConfig",
     # default apps
     "django.contrib.admin",
     "django.contrib.auth",
