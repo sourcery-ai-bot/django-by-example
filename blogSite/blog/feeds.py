@@ -5,9 +5,9 @@ from django.template.defaultfilters import truncatewords
 
 
 class LatestPostsFeed(Feed):
-    title = 'My Blog'
-    link = '/blog/'
-    description = 'New posts from my blog.'
+    title = "My Blog"
+    link = "/blog/"
+    description = "New posts from my blog."
 
     def items(self):
         return Post.published.all()[:5]

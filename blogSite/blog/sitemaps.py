@@ -4,7 +4,7 @@ from django.contrib.sitemaps import Sitemap
 
 
 class PostSitemap(Sitemap):
-    changefreq = 'weekly'
+    changefreq = "weekly"
     priority = 0.9
 
     def items(self):

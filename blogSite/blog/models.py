@@ -19,30 +19,20 @@ from django.db.models import (
 
 class PublishedManager(Manager):
     def get_queryset(self):
-        return super(PublishedManager, self) \
-                .get_queryset() \
-                .filter(status='published')
+        return super(PublishedManager, self).get_queryset().filter(status="published")
 
 
 class Post(Model):
-    STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
-    )
+    STATUS_CHOICES = (("draft", "Draft"), ("published", "Published"))
 
     title = CharField(max_length=250)
-    slug = SlugField(max_length=250,
-                     unique_for_date='publish')
-    author = ForeignKey(User,
-                        on_delete=CASCADE,
-                        related_name='blog_posts')
+    slug = SlugField(max_length=250, unique_for_date="publish")
+    author = ForeignKey(User, on_delete=CASCADE, related_name="blog_posts")
     body = TextField()
     publish = DateTimeField(default=timezone.now)
     created = DateTimeField(auto_now_add=True)
     updated = DateTimeField(auto_now=True)
-    status = CharField(max_length=10,
-                       choices=STATUS_CHOICES,
-                       default='draft')
+    status = CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
 
     # Model Managers
     objects = Manager()
@@ -50,25 +40,20 @@ class Post(Model):
     tags = TaggableManager()
 
     class Meta:
-        ordering = ('-publish',)
+        ordering = ("-publish",)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
-                       args=[
-                           self.publish.year,
-                           self.publish.month,
-                           self.publish.day,
-                           self.slug
-                       ])
+        return reverse(
+            "blog:post_detail",
+            args=[self.publish.year, self.publish.month, self.publish.day, self.slug],
+        )
 
 
 class Comment(Model):
-    post = ForeignKey(Post,
-                      on_delete=CASCADE,
-                      related_name='comments')
+    post = ForeignKey(Post, on_delete=CASCADE, related_name="comments")
     name = CharField(max_length=80)
     email = EmailField()
     body = TextField()
@@ -77,7 +62,7 @@ class Comment(Model):
     active = BooleanField(default=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ("created",)
 
     def __str__(self):
-        return f'Comment by {self.name} on {self.post}'
+        return f"Comment by {self.name} on {self.post}"
