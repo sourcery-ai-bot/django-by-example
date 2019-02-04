@@ -135,7 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
-LOGOUT_URL= 'logout'
+LOGOUT_URL = 'logout'
 
 # Email SMTP Setup
 EMAIL_HOST = os.getenv('EMAIL_HOST')
