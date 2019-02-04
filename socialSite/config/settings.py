@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     # my apps
     'account.apps.AccountConfig',
+    'images.apps.ImagesConfig',
     # default apps
     'django.contrib.admin',
     'django.contrib.auth',
