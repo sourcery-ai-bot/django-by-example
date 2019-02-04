@@ -29,7 +29,9 @@ def image_create(request):
         form = ImageCreateForm(data=request.GET)
 
     return render(
-        request, "images/image/create.html", {"section": "images", "form": form}
+        request,
+        "images/image/create.html",
+        {"section": "images", "form": form},
     )
 
 
@@ -57,7 +59,9 @@ def image_list(request):
             {"section": "images", "images": images},
         )
     return render(
-        request, "images/image/list.html", {"section": "images", "images": images}
+        request,
+        "images/image/list.html",
+        {"section": "images", "images": images},
     )
 
 
@@ -65,7 +69,9 @@ def image_list(request):
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
     return render(
-        request, "images/image/detail.html", {"section": "images", "image": image}
+        request,
+        "images/image/detail.html",
+        {"section": "images", "image": image},
     )
 
 

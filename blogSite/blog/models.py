@@ -19,7 +19,11 @@ from django.db.models import (
 
 class PublishedManager(Manager):
     def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status="published")
+        return (
+            super(PublishedManager, self)
+            .get_queryset()
+            .filter(status="published")
+        )
 
 
 class Post(Model):
@@ -48,7 +52,12 @@ class Post(Model):
     def get_absolute_url(self):
         return reverse(
             "blog:post_detail",
-            args=[self.publish.year, self.publish.month, self.publish.day, self.slug],
+            args=[
+                self.publish.year,
+                self.publish.month,
+                self.publish.day,
+                self.slug,
+            ],
         )
 
 

@@ -6,7 +6,10 @@ import taggit.managers
 
 class Migration(migrations.Migration):
 
-    dependencies = [("taggit", "0002_auto_20150616_2121"), ("blog", "0002_comment")]
+    dependencies = [
+        ("taggit", "0002_auto_20150616_2121"),
+        ("blog", "0002_comment"),
+    ]
 
     operations = [
         migrations.AddField(

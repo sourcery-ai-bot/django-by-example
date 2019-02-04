@@ -25,7 +25,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("date_of_birth", models.DateField(blank=True, null=True)),
-                ("photo", models.ImageField(blank=True, upload_to="users/%Y/%m/%d/")),
+                (
+                    "photo",
+                    models.ImageField(blank=True, upload_to="users/%Y/%m/%d/"),
+                ),
                 (
                     "user",
                     models.OneToOneField(
