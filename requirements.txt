@@ -22,7 +22,7 @@ ipython==7.2.0
 ipython-genutils==0.2.0
 isort==4.3.4
 jedi==0.13.2
-kombu==4.2.2.post1
+kombu==4.1.0
 Markdown==2.6.11
 oauthlib==3.0.1
 parso==0.3.2
