@@ -1,6 +1,6 @@
-from .models import Post
-
 from django.contrib.sitemaps import Sitemap
+
+from .models import Post
 
 
 class PostSitemap(Sitemap):

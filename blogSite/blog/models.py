@@ -1,11 +1,7 @@
 from django.contrib.auth.models import User
-from django.utils import timezone
-from django.urls import reverse
-from taggit.managers import TaggableManager
-
 from django.db.models import (
-    BooleanField,
     CASCADE,
+    BooleanField,
     CharField,
     DateTimeField,
     EmailField,
@@ -15,6 +11,9 @@ from django.db.models import (
     SlugField,
     TextField,
 )
+from django.urls import reverse
+from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 class PublishedManager(Manager):

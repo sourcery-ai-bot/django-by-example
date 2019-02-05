@@ -1,5 +1,6 @@
-from .models import Comment
 from django.forms import CharField, EmailField, Form, ModelForm, Textarea
+
+from .models import Comment
 
 
 class SearchForm(Form):

@@ -1,10 +1,9 @@
-from ..models import Post
-
-from django.db.models import Count
-from django.utils.safestring import mark_safe
-from django.template import Library
-
 import markdown
+from django.db.models import Count
+from django.template import Library
+from django.utils.safestring import mark_safe
+
+from ..models import Post
 
 register = Library()
 
