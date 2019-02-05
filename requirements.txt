@@ -1,8 +1,11 @@
+amqp==2.4.1
 appdirs==1.4.3
 appnope==0.1.0
 attrs==18.2.0
 backcall==0.1.0
+billiard==3.5.0.5
 black==18.9b0
+celery==4.1.0
 certifi==2018.11.29
 chardet==3.0.4
 Click==7.0
@@ -15,7 +18,9 @@ idna==2.8
 ipdb==0.11
 ipython==7.2.0
 ipython-genutils==0.2.0
+isort==4.3.4
 jedi==0.13.2
+kombu==4.2.2.post1
 Markdown==2.6.11
 oauthlib==3.0.1
 parso==0.3.2
@@ -40,5 +45,6 @@ sorl-thumbnail==12.4.1
 toml==0.10.0
 traitlets==4.3.2
 urllib3==1.24.1
+vine==1.2.0
 wcwidth==0.1.7
 Werkzeug==0.14.1
