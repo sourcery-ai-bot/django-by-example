@@ -1,0 +1,24 @@
+{% load static %}
+{% load shop_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/base.css" %}?{% cache_bust %}" rel="stylesheet">
+</head>
+<body>
+  <a href="/admin">Admin</a>
+  <div id="header">
+    <a href="/" class="logo">My Shop</a>
+  </div>
+  <div id="subheader">
+    <div class="cart">
+      Your Cart is Empty
+    </div>
+  </div>
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
