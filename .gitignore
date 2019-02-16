@@ -2,6 +2,7 @@ venv/
 __pycache__
 *.sqlite3
 *.swp
+myShop/prod*
 
 ngrok
 clean-pycache.py
