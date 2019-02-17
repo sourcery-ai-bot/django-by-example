@@ -3,6 +3,7 @@ __pycache__
 *.sqlite3
 *.swp
 myShop/prod*
+myShop/static*
 
 ngrok
 clean-pycache.py
