@@ -11,24 +11,23 @@
     <div id="cvv" class="field"></div>
     <label for="expiration-date">Expiration Date</label>
     <div id="expiration-date" class="field"></div>
-    <input type="hidden" id="nonce" name="payment_method_nonce", value="">
+    <input type="hidden" id="nonce" name="payment_method_nonce" value="">
     {% csrf_token %}
     <input type="submit" value="Pay">
   </form>
   <!-- Load the required client component -->
   <script src="https://js.braintreegateway.com/web/3.29.0/js/client.min.js"></script>
   <!-- Load Hosted Fields component. -->
-  <script src="https://js.braintreegateway.com/web/3.29.0/js/hosted-
-  fields.min.js"></script>
+  <script src="https://js.braintreegateway.com/web/3.29.0/js/hosted-fields.min.js"></script>
   <script>
     var form = document.querySelector('#payment');
     var submit = document.querySelector('input[type="submit"]');
 
     braintree.client.create({
       authorization: '{{ client_token }}'
-    }, function (clientError, clientInstance) {
-      if (clientError) {
-        console.error(clientError);
+    }, function (clientErr, clientInstance) {
+      if (clientErr) {
+        console.error(clientErr);
         return;
       }
 
@@ -44,20 +43,20 @@
           cvv: {selector: '#cvv'},
           expirationDate: {selector: '#expiration-date'}
         }
-      }, function (hostedFieldsError, hostedFieldsInstance) {
-        if (hostedFieldsError) {
-          console.error(hostedFieldsError);
+      }, function (hostedFieldsErr, hostedFieldsInstance) {
+        if (hostedFieldsErr) {
+          console.error(hostedFieldsErr);
           return;
         }
 
         submit.removeAttribute('disabled');
 
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
           event.preventDefault();
 
-          hostedFieldsInstance.tokenize(function (tokenizeError, payload) {
-            if (tokenizeError) {
-              console.error(tokenizeError);
+          hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+            if (tokenizeErr) {
+              console.error(tokenizeErr);
               return;
             }
             // set nonce to send to the server

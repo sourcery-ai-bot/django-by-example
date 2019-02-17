@@ -12,7 +12,7 @@ def payment_process(request):
         # retrieve nonce
         nonce = request.POST.get("payment_method_nonce", None)
         # create and submit transaction
-        result = braintree.Transaction.salve(
+        result = braintree.Transaction.sale(
             {
                 "amount": f"{order.get_total_cost():.2f}",
                 "payment_method_nonce": nonce,
