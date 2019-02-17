@@ -17,7 +17,11 @@ def order_create(request):
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            if cart.coupon:
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
+            order.save()
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
@@ -49,7 +53,7 @@ def admin_order_detail(request, order_id):
 @staff_member_required
 def admin_order_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    html = render_to_string("orders/order/pdf.html", {"order": order})
+    html = render_to_string("admin/orders/order/pdf.html", {"order": order})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'filename="order_{order.id}.pdf"'
     static_root = settings.STATIC_ROOT
