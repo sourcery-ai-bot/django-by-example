@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_extensions",
     # custom apps
     "cart.apps.CartConfig",
+    "coupons.apps.CouponsConfig",
     "orders.apps.OrdersConfig",
     "payment.apps.PaymentConfig",
     "shop.apps.ShopConfig",
@@ -142,7 +143,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Payment Processing
 BRAINTREE_MERCHANT_ID = os.getenv("BRAINTREE_MERCHANT_ID")
