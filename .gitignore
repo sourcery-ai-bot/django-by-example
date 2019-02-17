@@ -7,3 +7,4 @@ myShop/prod*
 ngrok
 clean-pycache.py
 keys.sh
+*order.csv
