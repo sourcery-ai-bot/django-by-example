@@ -1,5 +1,11 @@
+from io import BytesIO
+
 import braintree
+import weasyprint
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 
 from orders.models import Order
 
@@ -22,9 +28,35 @@ def payment_process(request):
         if result.is_success:
             # mark the order as paid
             order.paid = True
+
             # store the unique transaction id
             order.braintree_id = result.transaction.id
             order.save()
+
+            # create invoice email
+            subject = f"My Shop - Invoice No. {order.id}"
+            msg = "Please, find attached the invoice for your recent purchase"
+            email = EmailMessage(
+                subject, msg, "admin@myshop.com", [order.email]
+            )
+
+            # generate PDF
+            html = render_to_string("orders/order/pdf.html", {"order": order})
+            out = BytesIO()
+            static_root = settings.STATIC_ROOT
+            stylesheets = [weasyprint.CSS(f"{static_root}css/pdf.css")]
+            weasyprint.HTML(string=html).write_pdf(
+                out, stylesheets=stylesheets
+            )
+
+            # attach PDF file
+            email.attach(
+                f"order_{order.id}.pdf", out.getvalue(), "application/pdf"
+            )
+
+            # send email
+            email.send()
+
             return redirect("payment:done")
         else:
             return redirect("payment:cancelled")
@@ -37,8 +69,10 @@ def payment_process(request):
             {"client_token": client_token, "order": order},
         )
 
+
 def payment_done(request):
-    return render(request, 'payment/done.html')
+    return render(request, "payment/done.html")
+
 
 def payment_cancelled(request):
-    return render(request, 'payment/cancelled.html')
+    return render(request, "payment/cancelled.html")
