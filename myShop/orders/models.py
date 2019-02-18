@@ -6,8 +6,6 @@ from django.db import models
 from coupons.models import Coupon
 from shop.models import Product
 
-from ipdb import set_trace
-
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50)

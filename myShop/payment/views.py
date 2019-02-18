@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 
 from orders.models import Order
+from shop.recommender import Recommender
 
 
 def payment_process(request):
@@ -28,6 +29,8 @@ def payment_process(request):
         if result.is_success:
             # mark the order as paid
             order.paid = True
+            recommender = Recommender()
+            recommender.products_bought(order.items.all())
 
             # store the unique transaction id
             order.braintree_id = result.transaction.id

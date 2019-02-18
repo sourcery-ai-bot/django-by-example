@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 
 from coupons.forms import CouponApplyForm
 from shop.models import Product
+from shop.recommender import Recommender
 
 from .cart import Cart
 from .forms import CartAddProductForm
@@ -37,6 +38,9 @@ def cart_detail(request):
             initial={"quantity": item["quantity"], "update": True}
         )
     coupon_apply_form = CouponApplyForm()
+    recommender = Recommender()
+    cart_products = [item['product'] for item in cart]
+    recommended_products = recommender.suggest_products_for(cart_products, 4)
     return render(
         request,
         "cart/detail.html",

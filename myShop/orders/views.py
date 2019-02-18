@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 
 from cart.cart import Cart
+from shop.recommender import Recommender
 
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
@@ -35,6 +36,9 @@ def order_create(request):
             order_created.delay(order.id)
             # set the order in the session
             request.session["order_id"] = order.id
+            # add recommendation
+            recommender = Recommender()
+            recommender.products_bought(order.items.all())
             # redirect for payment
             return redirect("payment:process")
     else:
@@ -53,7 +57,7 @@ def admin_order_detail(request, order_id):
 @staff_member_required
 def admin_order_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    html = render_to_string("admin/orders/order/pdf.html", {"order": order})
+    html = render_to_string("orders/order/pdf.html", {"order": order})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'filename="order_{order.id}.pdf"'
     static_root = settings.STATIC_ROOT
