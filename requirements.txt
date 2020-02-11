@@ -19,7 +19,7 @@ cryptography==2.5
 cssselect2==0.2.1
 decorator==4.3.2
 defusedxml==0.5.0
-Django==2.0.5
+Django==2.2.10
 django-extensions==2.1.5
 django-rest-auth==0.9.3
 django-saml2-auth==2.2.1
